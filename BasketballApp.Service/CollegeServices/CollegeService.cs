@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace BasketballApp.Service.CollegeServices
 {
-{
     public class CollegeService : ICollegeService
     {
         private readonly BasketballDbContext _context;
