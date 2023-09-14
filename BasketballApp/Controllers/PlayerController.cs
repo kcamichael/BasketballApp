@@ -52,14 +52,14 @@ namespace BasketballApp.Controllers
             return View(ModelState);
         }
 
+        [ValidateAntiForgeryToken]
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var player = await _playerService.GetPlayer(id);
             if (player is null) return NotFound();
-            else
-            {
+            else     
                 return View(player);
-            }
         }
 
         [HttpPost]

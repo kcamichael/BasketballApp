@@ -1,4 +1,5 @@
-﻿using BasketballApp.Service.CollegeServices;
+﻿using BasketballApp.Models.CollegeModels;
+using BasketballApp.Service.CollegeServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasketballApp.Controllers
@@ -12,12 +13,14 @@ namespace BasketballApp.Controllers
             _collegeService = collegeService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var collegees = await _collegeService.GetCollege();
-            return View(collegees);
+            var colleges = await _collegeService.GetCollege();
+            return View(colleges);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
             var college = await _collegeService.GetCollege(id);
@@ -28,9 +31,72 @@ namespace BasketballApp.Controllers
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CollegeCreate model)
+        {
+            if (ModelState.IsValid)
+            {
+                var isSuccessful = await _collegeService.AddCollege(model);
+                if (isSuccessful)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(ModelState);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var college = await _collegeService.GetCollege(id);
+            if (college is null) return NotFound();
+            else
+                return View(college);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(CollegeEdit model)
+        {
+            if (ModelState.IsValid)
+            {
+                var isSuccessful = await _collegeService.UpdateCollege(model);
+                if (isSuccessful)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View(ModelState);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int/*?*/ ID)
+        {
+            var college = await _collegeService.GetCollege(ID);
+            if (college is null) return NotFound();
+            else
+                return View(college);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteCollege(int ID)
+        {
+            var college = await _collegeService.GetCollege(ID);
+            if (college is null) return NotFound();
+            else
+                await _collegeService.DeleteCollege(ID);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
