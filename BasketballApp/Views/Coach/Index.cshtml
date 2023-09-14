@@ -1,8 +1,7 @@
 ﻿@model IEnumerable<BasketballApp.Models.CoachModels.CoachListItem>
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "Index";
+    ViewData["Title"] = "Coach";
 }
 
 <h1>Index</h1>
@@ -38,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.CollegeName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.ID })
             </td>
         </tr>
 }
