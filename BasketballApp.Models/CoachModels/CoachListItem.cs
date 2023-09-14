@@ -9,13 +9,9 @@ namespace BasketballApp.Models.CoachModels
 {
     public class CoachListItem
     {
-        [Key]
-        [Required]
         public int ID { get; set; }
-        [Required]
         public string Name { get; set; } = string.Empty;
-        [Required]
-        public int CollegeId { get; set; }
+        public string CollegeName { get; set; }
 
     }
 }

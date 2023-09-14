@@ -56,7 +56,12 @@ namespace BasketballApp.Service.CoachServices
 
         public async Task<List<CoachListItem>> GetCoach()
         {
-            return await _context.Coach.Select(p => _mapper.Map<CoachListItem>(p)).ToListAsync();
+            return await _context.Coach.Include(c => c.College).Select(c => new CoachListItem
+            {
+                ID = c.ID,
+                Name = c.Name,
+                CollegeName = c.College.Name
+            }).ToListAsync();
         }
 
         public async Task<List<CoachListItem>> GetCoachByCollege(string CollegeName)

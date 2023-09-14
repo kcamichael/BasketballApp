@@ -62,7 +62,12 @@ namespace BasketballApp.Service.CollegeServices
 
         public async Task<List<CollegeListItem>> GetCollege()
         {
-            return await _context.College.Select(p => _mapper.Map<CollegeListItem>(p)).ToListAsync();
+            return await _context.College.Select(c => new CollegeListItem
+            {
+                ID = c.ID,
+                Name = c.Name,
+                Conference = c.Conference,
+            }).ToListAsync();
         }
 
         public async Task<bool> UpdateCollege(CollegeEdit model)

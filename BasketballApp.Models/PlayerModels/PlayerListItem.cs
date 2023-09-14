@@ -16,6 +16,6 @@ namespace BasketballApp.Models.PlayerModels
         public string HighSchool { get; set; } = string.Empty;
         public int Height { get; set; }
         public int Weight { get; set; }
-        public int CollegeId { get; set; }
+        public string CollegeName { get; set; }
     }
 }

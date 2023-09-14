@@ -56,15 +56,20 @@ namespace BasketballApp.Service.PlayerServices
 
         public async Task<List<PlayerListItem>> GetPlayers()
         {
-            return await _context.Players.Select(p => _mapper.Map<PlayerListItem>(p)).ToListAsync();
+            return await _context.Players.Include(c => c.College).Select(c => new PlayerListItem
+            {
+                ID = c.ID,
+                Name = c.Name,
+                CollegeName = c.College.Name
+            }).ToListAsync();
         }
 
         public async Task<List<PlayerListItem>> GetPlayersByCollege(string CollegeName)
         {
-            return await _context.Players.Include(p => p.College).Where(p => p.College.Name == CollegeName).Select(p => new PlayerListItem
+            return await _context.Players.Include(c => c.College).Where(c => c.College.Name == CollegeName).Select(c => new PlayerListItem
             {
-                ID = p.ID,
-                Name = p.Name,
+                ID = c.ID,
+                Name = c.Name
             }).ToListAsync();
         }
 
