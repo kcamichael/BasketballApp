@@ -8,8 +8,32 @@ html {
   }
 }
 
+#create-button {
+    padding-top: 8px;
+}
+
+#save-button {
+    padding-top: 8px;
+}
+
+.coach-createnew {
+    color: Navy;
+}
+
+.college-createnew {
+    color: Navy;
+}
+
+.player-createnew {
+    color: Navy;
+}
+
 .navbar-brand{
     color: aliceblue
+}
+
+.form-group{
+    padding : 2px;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
