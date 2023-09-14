@@ -1,4 +1,5 @@
 ﻿using BasketballApp.Models.CollegeModels;
+using BasketballApp.Models.PlayerModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,6 @@ namespace BasketballApp.Service.CollegeServices
         public Task<bool> DeleteCollege(int id);
         public Task<CollegeDetail> GetCollege(int id);
         public Task<List<CollegeListItem>> GetCollege();
-
+        //public Task<CollegeEdit> GetCollegeEdit(int id);
     }
 }

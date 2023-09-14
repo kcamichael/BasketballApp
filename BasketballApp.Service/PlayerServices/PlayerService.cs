@@ -24,11 +24,11 @@ namespace BasketballApp.Service.PlayerServices
 
         public async Task<bool> AddPlayer(PlayerCreate model)
         {
-            var entity = _mapper.Map<PlayerEntity>(model);
+            var conversion = _mapper.Map<PlayerEntity>(model);
 
-            if (entity is not null)
+            if (conversion is not null)
             {
-                await _context.Players.AddAsync(entity);
+                await _context.Players.AddAsync(conversion);
                 return await _context.SaveChangesAsync() > 0;
             }
             return false;
@@ -53,6 +53,15 @@ namespace BasketballApp.Service.PlayerServices
 
             return _mapper.Map<PlayerDetail>(hooper);
         }
+
+        //public async Task<PlayerEdit> GetPlayerEdit(int id)
+        //{
+        //    var hooper = await _context.Players.Include(p => p.College).Include(p => p.Position).
+        //        SingleOrDefaultAsync(x => x.ID == id);
+        //    if (hooper is null) return null!;
+
+        //    return _mapper.Map<PlayerEdit>(hooper);
+        //}
 
         public async Task<List<PlayerListItem>> GetPlayers()
         {

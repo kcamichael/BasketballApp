@@ -2,6 +2,7 @@
 using BasketballApp.Data.BasketballDb;
 using BasketballApp.Data.Entities;
 using BasketballApp.Models.CoachModels;
+using BasketballApp.Models.PlayerModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -73,6 +74,13 @@ namespace BasketballApp.Service.CoachServices
             }).ToListAsync();
         }
 
+        //public async Task<CoachEdit> GetCoachEdit(int id)
+        //{
+        //    var coach = await _context.Players.Include(p => p.College).
+        //        SingleOrDefaultAsync(x => x.ID == id);
+        //    if (coach is null) return null!;
+        //        return _mapper.Map<CoachEdit>(coach);
+        //}
         public async Task<bool> UpdateCoach(CoachEdit model)
         {
             var coachInDb = await _context.Coach.AsNoTracking().FirstOrDefaultAsync(x => x.ID == model.ID);

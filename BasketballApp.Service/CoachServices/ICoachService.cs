@@ -1,4 +1,5 @@
 ﻿using BasketballApp.Models.CoachModels;
+using BasketballApp.Models.PlayerModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace BasketballApp.Service.CoachServices
         public Task<CoachDetail> GetCoach(int id);
         public Task<List<CoachListItem>> GetCoach();
         public Task<List<CoachListItem>> GetCoachByCollege(string CollegeName);
-
+        //public Task<CoachEdit> GetCoachEdit(int id);
     }
 }

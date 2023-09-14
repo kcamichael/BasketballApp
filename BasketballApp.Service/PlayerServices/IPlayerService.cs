@@ -16,6 +16,7 @@ namespace BasketballApp.Service.PlayerServices
         public Task<List<PlayerListItem>> GetPlayers();
         public Task<List<PlayerListItem>> GetPlayersByCollege(string CollegeName);
         public Task<List<PlayerListItem>> GetPlayersByPosition(string PositionName);
+        //public Task<PlayerEdit> GetPlayerEdit(int id);
 
     }
 }

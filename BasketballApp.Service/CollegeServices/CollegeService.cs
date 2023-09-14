@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BasketballApp.Data.BasketballDb;
 using BasketballApp.Data.Entities;
+using BasketballApp.Models.CoachModels;
 using BasketballApp.Models.CollegeModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -69,6 +70,14 @@ namespace BasketballApp.Service.CollegeServices
                 Conference = c.Conference,
             }).ToListAsync();
         }
+
+        //public async Task<CollegeEdit> GetCollegeEdit(int id)
+        //{
+        //    var college = await _context.Players.
+        //        SingleOrDefaultAsync(x => x.ID == id);
+        //    if (college is null) return null!;
+        //    return _mapper.Map<CollegeEdit>(college);
+        //}
 
         public async Task<bool> UpdateCollege(CollegeEdit model)
         {
