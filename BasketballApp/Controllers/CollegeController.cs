@@ -38,7 +38,6 @@ namespace BasketballApp.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CollegeCreate model)
         {
             if (ModelState.IsValid)
@@ -70,7 +69,6 @@ namespace BasketballApp.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(CollegeEdit model)
         {
             if (ModelState.IsValid)
@@ -85,9 +83,9 @@ namespace BasketballApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int/*?*/ ID)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var college = await _collegeService.GetCollege(ID);
+            var college = await _collegeService.GetCollege(id.Value);
             if (college is null) return NotFound();
             else
                 return View(college);
@@ -95,13 +93,12 @@ namespace BasketballApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ActionName("Delete")]
-        public async Task<IActionResult> DeleteCollege(int ID)
+        public async Task<IActionResult> DeleteCollege(int id)
         {
-            var college = await _collegeService.GetCollege(ID);
+            var college = await _collegeService.GetCollege(id);
             if (college is null) return NotFound();
             else
-                await _collegeService.DeleteCollege(ID);
+                await _collegeService.DeleteCollege(id);
             return RedirectToAction(nameof(Index));
         }
 
