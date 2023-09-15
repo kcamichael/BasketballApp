@@ -52,14 +52,23 @@ namespace BasketballApp.Controllers
             return View(ModelState);
         }
 
-        [ValidateAntiForgeryToken]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var player = await _playerService.GetPlayer(id);
             if (player is null) return NotFound();
-            else     
-                return View(player);
+            var playerEdit = new PlayerEdit
+            {
+                ID = player.ID,
+                Name = player.Name,
+                Number = player.Number,
+                PositionId = player.Position.Id,
+                CollegeId = player.College.ID,
+                Height = player.Height,
+                Weight = player.Weight,
+                HighSchool = player.HighSchool
+            };
+            return View(playerEdit);
         }
 
         [HttpPost]
@@ -78,7 +87,8 @@ namespace BasketballApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Delete(int/*?*/ ID)
+        //public async Task<IActionResult> Delete(int? ID)
+        public async Task<IActionResult> Delete(int ID)
         {
             var player = await _playerService.GetPlayer(ID);
             if (player is null) return NotFound();

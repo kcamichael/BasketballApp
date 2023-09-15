@@ -52,14 +52,21 @@ namespace BasketballApp.Controllers
             return View(ModelState);
         }
 
-        [ValidateAntiForgeryToken]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var college = await _collegeService.GetCollege(id);
             if (college is null) return NotFound();
-            else
-                return View(college);
+            var collegeEdit = new CollegeEdit
+            {
+                ID = college.ID,
+                Name = college.Name,
+                Conference = college.Conference,
+                City = college.City,
+                State = college.State,
+                Arena = college.Arena
+            };
+            return View(collegeEdit);
         }
 
         [HttpPost]

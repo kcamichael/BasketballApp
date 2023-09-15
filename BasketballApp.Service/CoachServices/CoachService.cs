@@ -25,14 +25,13 @@ namespace BasketballApp.Service.CoachServices
 
         public async Task<bool> AddCoach(CoachCreate model)
         {
-            var entity = _mapper.Map<CoachEntity>(model);
-
-            if (entity is not null)
+            var entity = new CoachEntity
             {
-                await _context.Coach.AddAsync(entity);
-                return await _context.SaveChangesAsync() > 0;
-            }
-            return false;
+                Name = model.Name,
+                CollegeId = model.CollegeId,    
+            };
+            await _context.Coach.AddAsync(entity);
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> DeleteCoach(int id)
@@ -49,10 +48,19 @@ namespace BasketballApp.Service.CoachServices
 
         public async Task<CoachDetail> GetCoach(int id)
         {
-            var coachInDb = await _context.Coach.Include(p => p.Name).Include(p => p.College).SingleOrDefaultAsync(x => x.ID == id);
+            var coachInDb = await _context.Coach.Include(p => p.College).SingleOrDefaultAsync(x => x.ID == id);
             if (coachInDb is null) return null!;
 
-            return _mapper.Map<CoachDetail>(coachInDb);
+            return new CoachDetail
+            {
+                ID = coachInDb.ID,
+                Name = coachInDb.Name,
+                College = new Models.CollegeModels.CollegeListItem()
+                {
+                    ID = coachInDb.CollegeId,
+                    Name = coachInDb.College.Name
+                }
+            };
         }
 
         public async Task<List<CoachListItem>> GetCoach()
@@ -83,11 +91,11 @@ namespace BasketballApp.Service.CoachServices
         //}
         public async Task<bool> UpdateCoach(CoachEdit model)
         {
-            var coachInDb = await _context.Coach.AsNoTracking().FirstOrDefaultAsync(x => x.ID == model.ID);
+            var coachInDb = await _context.Coach.FirstOrDefaultAsync(x => x.ID == model.ID);
             if (coachInDb is null) return false;
 
-            var conversion = _mapper.Map<CoachEntity>(model);
-            _context.Coach.Update(conversion);
+            coachInDb.Name = model.Name;
+            coachInDb.CollegeId = model.CollegeId;
             await _context.SaveChangesAsync();
             return true;
         }

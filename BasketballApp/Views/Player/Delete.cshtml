@@ -55,10 +55,16 @@
             @Html.DisplayFor(model => model.Weight)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CollegeId)
+            @Html.DisplayNameFor(model => model.College.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CollegeId)
+            @Html.DisplayFor(model => model.College.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Position.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Position.Name)
         </dd>
     </dl>
     

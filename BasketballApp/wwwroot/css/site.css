@@ -41,9 +41,9 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
-  color: aliceblue;
+    position: relative;
+    min-height: 100%;
+    color: aliceblue;
 }
 
 header {

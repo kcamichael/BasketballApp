@@ -17,5 +17,6 @@ namespace BasketballApp.Models.PlayerModels
         public int Height { get; set; }
         public int Weight { get; set; }
         public int CollegeId { get; set; }
+        public int PositionId { get; set; }
     }
 }

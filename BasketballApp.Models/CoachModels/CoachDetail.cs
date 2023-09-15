@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BasketballApp.Models.CollegeModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,13 +10,8 @@ namespace BasketballApp.Models.CoachModels
 {
     public class CoachDetail
     {
-        [Key]
-        [Required]
         public int ID { get; set; }
-        [Required]
         public string Name { get; set; } = string.Empty;
-        [Required]
-        public int CollegeId { get; set; }
-
+        public CollegeListItem College { get; set; }
     }
 }

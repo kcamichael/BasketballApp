@@ -24,14 +24,18 @@ namespace BasketballApp.Service.PlayerServices
 
         public async Task<bool> AddPlayer(PlayerCreate model)
         {
-            var conversion = _mapper.Map<PlayerEntity>(model);
-
-            if (conversion is not null)
+            var entity = new PlayerEntity
             {
-                await _context.Players.AddAsync(conversion);
-                return await _context.SaveChangesAsync() > 0;
-            }
-            return false;
+                Name = model.Name,
+                Number = model.Number,
+                Height = model.Height,
+                Weight = model.Weight,
+                HighSchool = model.HighSchool,
+                CollegeId = model.CollegeId,
+                PositionId = model.PositionId
+            };
+            await _context.Players.AddAsync(entity);
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> DeletePlayer(int id)
@@ -47,11 +51,28 @@ namespace BasketballApp.Service.PlayerServices
         }
         public async Task<PlayerDetail> GetPlayer(int id)
         {
-            var hooper = await _context.Players.Include(p => p.College).Include(p => p.Position).
-                SingleOrDefaultAsync(x => x.ID == id);
+            var hooper = await _context.Players.Include(c => c.College).Include(p => p.Position).SingleOrDefaultAsync(x => x.ID == id);
             if (hooper is null) return null!;
 
-            return _mapper.Map<PlayerDetail>(hooper);
+            return new PlayerDetail
+            {
+                ID = hooper.ID,
+                Name = hooper.Name,
+                Height = hooper.Height,
+                Number = hooper.Number,
+                Weight = hooper.Weight,
+                HighSchool = hooper.HighSchool,
+                College = new Models.CollegeModels.CollegeListItem()
+                {
+                    ID = hooper.CollegeId,
+                    Name = hooper.College.Name
+                },
+                Position = new Models.PositionModels.PositionListItem()
+                {
+                    Id = hooper.PositionId,
+                    Name = hooper.Position.Name
+                }
+            };
         }
 
         //public async Task<PlayerEdit> GetPlayerEdit(int id)
@@ -65,10 +86,12 @@ namespace BasketballApp.Service.PlayerServices
 
         public async Task<List<PlayerListItem>> GetPlayers()
         {
-            return await _context.Players.Include(c => c.College).Select(c => new PlayerListItem
+            return await _context.Players.Include(c => c.College).Include(c => c.Position).Select(c => new PlayerListItem
             {
                 ID = c.ID,
                 Name = c.Name,
+                Number = c.Number,
+                PositionName = c.Position.Name,
                 CollegeName = c.College.Name
             }).ToListAsync();
         }
@@ -93,11 +116,24 @@ namespace BasketballApp.Service.PlayerServices
 
         public async Task<bool> UpdatePlayer(PlayerEdit model)
         {
-            var hooper = await _context.Players.AsNoTracking().FirstOrDefaultAsync(x => x.ID == model.ID);
-            if (hooper is null) return false;
+            //var hooper = await _context.Players.AsNoTracking().FirstOrDefaultAsync(x => x.ID == model.ID);
+            //if (hooper is null) return false;
 
-            var conversion = _mapper.Map<PlayerEntity>(model);
-            _context.Players.Update(conversion);
+            //var conversion = _mapper.Map<PlayerEntity>(model);
+            //_context.Players.Update(conversion);
+            //await _context.SaveChangesAsync();
+            //return true;
+
+            var playerInDb = await _context.Players.FirstOrDefaultAsync(x => x.ID == model.ID);
+            if (playerInDb is null) return false;
+
+            playerInDb.Name = model.Name;
+            playerInDb.Number = model.Number;
+            playerInDb.Height = model.Height;
+            playerInDb.Weight = model.Weight;
+            playerInDb.HighSchool = model.HighSchool;
+            playerInDb.CollegeId = model.CollegeId;
+            playerInDb.PositionId = model.PositionId;
             await _context.SaveChangesAsync();
             return true;
         }

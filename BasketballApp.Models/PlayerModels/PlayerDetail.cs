@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BasketballApp.Models.CollegeModels;
+using BasketballApp.Models.PositionModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,7 +18,7 @@ namespace BasketballApp.Models.PlayerModels
         public string HighSchool { get; set; } = string.Empty;
         public int Height { get; set; }
         public int Weight { get; set; }
-        public int CollegeId { get; set; }
-
+        public CollegeListItem College { get; set; }
+        public PositionListItem Position { get; set; }
     }
 }

@@ -9,29 +9,20 @@
 <p>
     <a class="player-createnew" asp-action="Create">Add Player</a>
 </p>
-<table class="table">
+<table class="table table-striped" >
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ID)
+                ID
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Number)
+                Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HighSchool)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Height)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Weight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CollegeName)
+                College
             </th>
             <th></th>
         </tr>
@@ -49,20 +40,11 @@
                 @Html.DisplayFor(modelItem => item.Number)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.HighSchool)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Height)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weight)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.CollegeName)
             </td>
             <td>
                 <a asp-route-ID="@item.ID" asp-action="Edit" class="btn btn-warning">Edit</a>
-                <a asp-route-ID="@item.ID" asp-action="Details" class="btn btn-info">Details</a>
+                <a asp-route-ID="@item.ID" asp-action="Detail" class="btn btn-info">Details</a>
                 <a asp-route-ID="@item.ID" asp-action="Delete" class="btn btn-danger">Delete</a>
             </td>
         </tr>
