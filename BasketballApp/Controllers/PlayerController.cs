@@ -87,7 +87,6 @@ namespace BasketballApp.Controllers
         }
 
         [HttpGet]
-        //public async Task<IActionResult> Delete(int? ID)
         public async Task<IActionResult> Delete(int ID)
         {
             var player = await _playerService.GetPlayer(ID);

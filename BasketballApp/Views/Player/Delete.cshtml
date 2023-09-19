@@ -9,13 +9,13 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Delete</title>
+    <title>Delete Player</title>
 </head>
 <body>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Delete Player</h3>
 <div>
-    <h4>PlayerDetail</h4>
+        <h5>Are you sure you want to delete this?</h5>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -71,7 +71,7 @@
     <form asp-action="Delete">
             <input asp-for="@Model.ID" hidden />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index" id="back-to-list">Back to List</a>
     </form>
 </div>
 </body>

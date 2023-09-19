@@ -1983,10 +1983,10 @@ progress {
   padding: 0.25rem 0.25rem;
 }
 
-.table-bordered > :not(caption) > * {
+.table-border border-info > :not(caption) > * {
   border-width: 1px 0;
 }
-.table-bordered > :not(caption) > * > * {
+.table-border border-info > :not(caption) > * > * {
   border-width: 0 1px;
 }
 
@@ -2045,7 +2045,7 @@ progress {
   border-color: #bcd0c7;
 }
 
-.table-info {
+.table-striped {
   --bs-table-bg: #cff4fc;
   --bs-table-striped-bg: #c5e8ef;
   --bs-table-striped-color: #000;

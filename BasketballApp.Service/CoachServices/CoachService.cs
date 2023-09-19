@@ -2,7 +2,6 @@
 using BasketballApp.Data.BasketballDb;
 using BasketballApp.Data.Entities;
 using BasketballApp.Models.CoachModels;
-using BasketballApp.Models.PlayerModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

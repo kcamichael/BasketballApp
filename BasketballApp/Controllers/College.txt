@@ -1,4 +1,4 @@
-﻿using BasketballApp.Models.CollegeModels;
+using BasketballApp.Models.CollegeModels;
 using BasketballApp.Service.CollegeServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,29 +7,38 @@ namespace BasketballApp.Controllers
     public class CollegeController : Controller
     {
         private readonly ICollegeService _collegeService;
+
         public CollegeController(ICollegeService collegeService)
         {
             _collegeService = collegeService;
         }
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var college = await _collegeService.GetCollege();
-            return View(college);
+            var colleges = await _collegeService.GetCollege();
+            return View(colleges);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
             var college = await _collegeService.GetCollege(id);
-            if (college == null) return NotFound();
-            else return View(college);
+            if (college is null) return NotFound();
+            else
+            {
+                return View(college);
+            }
         }
 
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
             return View();
         }
 
-        public async Task<IActionResult> CreateCollege(CollegeCreate model)
+        [HttpPost]
+        public async Task<IActionResult> Create(CollegeCreate model)
         {
             if (ModelState.IsValid)
             {
@@ -39,13 +48,14 @@ namespace BasketballApp.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
-            return View(model);
+            return View(ModelState);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var college = await _collegeService.GetCollege(id);
-            if (college == null) return NotFound();
+            if (college is null) return NotFound();
             var collegeEdit = new CollegeEdit
             {
                 ID = college.ID,
@@ -72,20 +82,32 @@ namespace BasketballApp.Controllers
             return View(ModelState);
         }
 
+        //[HttpGet]
+        //public async Task<IActionResult> Delete(int? id)
+        //{
+        //    var college = await _collegeService.GetCollege(id.Value);
+        //    if (college is null) return NotFound();
+        //    else
+        //        return View(college);
+        //}
+
         public async Task<IActionResult> Delete(int? id)
         {
             var college = await _collegeService.GetCollege(id.Value);
-            if(college == null) return NotFound();
+            if (college is null) return NotFound();
             else
                 return View(college);
         }
 
+
         public async Task<IActionResult> DeleteCollege(int id)
         {
             var college = await _collegeService.GetCollege(id);
-            if (college==null) return NotFound();
-            else await _collegeService.DeleteCollege(id);
+            if (college is null) return NotFound();
+            else
+                await _collegeService.DeleteCollege(id);
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

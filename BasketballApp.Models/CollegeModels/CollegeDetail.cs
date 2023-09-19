@@ -22,9 +22,7 @@ namespace BasketballApp.Models.CollegeModels
         public string City { get; set; } = string.Empty;
         [MaxLength(50)]
         public string State { get; set; } = string.Empty;
-        [Required]
         [MaxLength(200)]
         public string Arena { get; set; } = string.Empty;
-
     }
 }

@@ -516,9 +516,10 @@ progress {
 }
 
 .display-4 {
-  font-size: calc(1.475rem + 2.7vw);
-  font-weight: 300;
-  line-height: 1.2;
+    font-size: calc(1.475rem + 2.7vw);
+    font-weight: 300;
+    line-height: 1.2;
+    color: aliceblue;
 }
 @media (min-width: 1200px) {
   .display-4 {
@@ -1985,10 +1986,10 @@ progress {
   padding: 0.25rem 0.25rem;
 }
 
-.table-bordered > :not(caption) > * {
+.table-border border-info > :not(caption) > * {
   border-width: 1px 0;
 }
-.table-bordered > :not(caption) > * > * {
+.table-border border-info > :not(caption) > * > * {
   border-width: 0 1px;
 }
 
@@ -2047,7 +2048,7 @@ progress {
   border-color: #bcd0c7;
 }
 
-.table-info {
+.table-striped {
   --bs-table-bg: #cff4fc;
   --bs-table-striped-bg: #c5e8ef;
   --bs-table-striped-color: #000;

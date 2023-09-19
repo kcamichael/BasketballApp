@@ -1,11 +1,36 @@
+body {
+    min-width: 100%;
+    min-height: 100%;
+    background: linear-gradient(0deg, rgba(16, 11, 70, .72), rgb(156, 156, 156));
+    border-radius: 16px;
+}
+
 html {
   font-size: 14px;
+}
+
+#delete-btn{
+    padding-top: 7px
+}
+
+.detail-buttons {
+    color: Navy;  
 }
 
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
+}
+
+.tables-title {
+    color: rgba(16, 11, 70)
+}
+
+#title-and-such {
+    padding-top: 50px;
+    font-size: larger;
+    color: rgb(16, 11, 70);
 }
 
 #create-button {
@@ -47,7 +72,7 @@ html {
 }
 
 header {
-    background-color: #110d44;
+    background-color: #100b46;
 }
 
 body {

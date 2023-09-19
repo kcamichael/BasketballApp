@@ -4,10 +4,9 @@
     ViewData["Title"] = "Detail";
 }
 
-<h1>Detail</h1>
+<h1>@Html.DisplayFor(model => model.Name)</h1>
 
 <div>
-    <h4>CollegeDetail</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -49,10 +48,10 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" id="back-to-list" class="detail-buttons">Back to List</a>
 </div>
-<form asp-action="Delete" method="post">
-    <input asp-for="@Model.ID" hidden/>
+
+<form asp-action="Delete" id="delete-btn" method="post">
+    <input asp-for="@Model.ID" hidden />
     <button type="submit" class="btn btn-danger">Delete</button>
 </form>

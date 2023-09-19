@@ -2,8 +2,6 @@
 using BasketballApp.Data.BasketballDb;
 using BasketballApp.Data.Entities;
 using BasketballApp.Models.CollegeModels;
-using BasketballApp.Models.CollegeModels;
-using BasketballApp.Models.CollegeModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -41,7 +39,8 @@ namespace BasketballApp.Service.CollegeServices
         public async Task<bool> DeleteCollege(int id)
         {
             var collegeInDb = await _context.College.FindAsync(id);
-            if (collegeInDb is null) return false;
+            if (collegeInDb is null) 
+                return false;
             else
             {
                 _context.College.Remove(collegeInDb);
@@ -72,9 +71,9 @@ namespace BasketballApp.Service.CollegeServices
                 Name = collegeInDb.Name,
                 Conference = collegeInDb.Conference,
                 City = collegeInDb.City,
-                State = collegeInDb.State
+                State = collegeInDb.State,
+                Arena = collegeInDb.Arena
             };
-
         }
 
         public async Task<List<CollegeListItem>> GetCollege()
@@ -102,9 +101,9 @@ namespace BasketballApp.Service.CollegeServices
 
             collegeInDb.Name = model.Name;
             collegeInDb.Conference = model.Conference;
-            collegeInDb.Arena = model.Arena;
             collegeInDb.City = model.City;
             collegeInDb.State = model.State;
+            collegeInDb.Arena = model.Arena;
             await _context.SaveChangesAsync();
             return true;
         }

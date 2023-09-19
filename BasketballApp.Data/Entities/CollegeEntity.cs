@@ -22,7 +22,6 @@ namespace BasketballApp.Data.Entities
         public string City { get; set; } = string.Empty;
         [MaxLength(50)]
         public string State { get; set; } = string.Empty;
-        [Required]
         [MaxLength(250)]
         public string Arena { get; set; } = string.Empty;
 
